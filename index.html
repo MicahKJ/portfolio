@@ -12,7 +12,7 @@
       height: 100vh;
       margin: 0;
       font-family: 'Arial', sans-serif;
-      background: #f0f0f0;
+      background: #fff8e7; /* slight cream */
       flex-direction: column;
       text-align: center;
     }
@@ -21,16 +21,33 @@
       margin: 0;
       color: #222;
       min-height: 3.5rem;
+      display: inline-block;
+      white-space: nowrap;
+    }
+    .cursor {
+      display: inline-block;
+      width: 2px;
+      background-color: #222;
+      margin-left: 2px;
+      animation: blink 0.7s infinite;
+      vertical-align: bottom;
+    }
+    @keyframes blink {
+      0%, 50%, 100% { opacity: 1; }
+      25%, 75% { opacity: 0; }
     }
     p {
       font-size: 1.2rem;
       color: #555;
-      margin-top: 15px;
+      margin-top: 20px;
+    }
+    b {
+      font-weight: bold;
     }
   </style>
 </head>
 <body>
-  <h1 id="name"></h1>
+  <h1 id="name"></h1><span class="cursor"></span>
   <p id="description"></p>
 
   <script>
@@ -44,30 +61,33 @@
       if (i < fullName.length) {
         nameElement.textContent += fullName.charAt(i);
         i++;
-        setTimeout(typeName, 150); // adjust typing speed
+        setTimeout(typeName, 150); // typing speed
       } else {
-        // After typing finishes, show description
-        showDescription();
+        startAgeUpdate(); // Start real-time age update after typing finishes
       }
     }
 
-    // Age calculation function
+    // Real-time age calculation
     function calculateAge(birthday) {
       const now = new Date();
       const birthDate = new Date(birthday);
       const diff = now - birthDate; // milliseconds
-      const ageDecimal = diff / (1000 * 60 * 60 * 24 * 365.25); // approximate decimal age
-      return ageDecimal.toFixed(2);
+      const ageDecimal = diff / (1000 * 60 * 60 * 24 * 365.25); // decimal years
+      return ageDecimal.toFixed(8);
     }
 
-    function showDescription() {
+    // Update age continuously
+    function updateDescription() {
       const age = calculateAge("2007-09-13T00:00:00");
-      descriptionElement.textContent = `I'm an ${age} A-Level student studying Computer Science, Maths, Physics and IT.`;
+      descriptionElement.innerHTML = `I'm an <b>${age}</b> year old A-Level student studying Computer Science, Maths, Physics and IT.`;
     }
 
-    // Start typing on page load
+    function startAgeUpdate() {
+      updateDescription();
+      setInterval(updateDescription, 1000); // update every second
+    }
+
     window.onload = typeName;
   </script>
 </body>
 </html>
-
