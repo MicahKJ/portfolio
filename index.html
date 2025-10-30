@@ -143,6 +143,46 @@
       box-shadow: 0 6px 15px rgba(0,0,0,0.2);
     }
 
+    /* Contact Section */
+    .contact {
+      margin-top: 30px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      opacity: 0;
+      transition: opacity 1s ease-in;
+    }
+    
+    .contact.visible {
+      opacity: 1;
+    }
+    
+    .contact-item {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      background: #fff;
+      padding: 15px 25px;
+      border-radius: 10px;
+      box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+    }
+    
+    .contact-item img {
+      width: 30px;
+      height: 30px;
+    }
+    
+    .contact-item a {
+      color: #222;
+      text-decoration: none;
+      font-size: 1.1rem;
+      font-weight: bold;
+    }
+    
+    .contact-item a:hover {
+      color: #4caf50;
+    }
+
   </style>
 </head>
 <body>
@@ -179,7 +219,7 @@
     <div class="project-card">
       <h3>Portfolio Website</h3>
       <p>This page! Built using HTML, CSS, and JavaScript.</p>
-      <a href="https://micah.eu.org/" target="_blank" rel="noopener noreferrer">View Project</a> | <a href="https://github.com/MicahKJ/portfolio" target="_blank" rel="noopener noreferrer">View Source</a>
+      <a href="https://micah.eu.org/">View Project</a> | <a href="https://github.com/MicahKJ/portfolio" target="_blank" rel="noopener noreferrer">View Source</a>
     </div>
     <div class="project-card">
       <h3>Symptom Checker</h3>
@@ -192,6 +232,15 @@
       <a href="/calculator/" target="_blank" rel="noopener noreferrer">View Project</a>
     </div>
   </div>
+
+  <!-- Contacts Section -->
+  <h2 id="contact-heading">Contact</h2>
+<div class="contact" id="contact-container">
+  <div class="contact-item">
+    <img src="https://cdn-icons-png.flaticon.com/512/732/732200.png" alt="Email Icon">
+    <p><a href="mailto:micah.joseph07@gmail.com">micah.joseph07@gmail.com</a></p>
+  </div>
+</div>
 
   <script>
     const fullName = "Micah Joseph";
@@ -264,6 +313,12 @@
         }, index * 300);
       });
     }
+        // Animate Contact section
+    setTimeout(() => {
+      document.getElementById("contact-heading").classList.add("visible");
+      document.getElementById("contact-container").classList.add("visible");
+    }, 1800);
+
 
     window.onload = typeName;
   </script>
