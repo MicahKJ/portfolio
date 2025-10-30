@@ -25,12 +25,12 @@
       min-height: 3.5rem;
     }
 
-    p, h2, .skills {
+    p, h2, .skills, .projects {
       opacity: 0; /* start hidden */
       transition: opacity 1s ease-in; /* fade-in effect */
     }
 
-    p.visible, h2.visible, .skills.visible {
+    p.visible, h2.visible, .skills.visible, .projects.visible {
       opacity: 1;
     }
 
@@ -44,6 +44,13 @@
       color: #222;
     }
 
+    p {
+      font-size: 1.4rem; /* slightly bigger text */
+      color: #555;
+      margin-top: 20px;
+    }
+
+    /* Skills Section */
     .skills {
       margin-top: 20px;
       width: 80%;
@@ -76,6 +83,51 @@
       border-radius: 5px;
       transition: width 1s ease-in-out;
     }
+
+    /* Projects Section */
+    .projects {
+      margin-top: 40px;
+      width: 80%;
+      max-width: 800px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+
+    .project-card {
+      background: #fff;
+      border-radius: 10px;
+      box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+      padding: 20px;
+      margin-bottom: 20px;
+      width: 100%;
+      text-align: left;
+      opacity: 0;
+      transform: translateY(20px);
+      transition: opacity 0.6s ease-in-out, transform 0.6s ease-in-out;
+    }
+
+    .project-card.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    .project-card h3 {
+      margin: 0 0 10px;
+      color: #222;
+    }
+
+    .project-card p {
+      margin: 0 0 10px;
+      color: #555;
+    }
+
+    .project-card a {
+      color: #4caf50;
+      text-decoration: none;
+      font-weight: bold;
+    }
+
   </style>
 </head>
 <body>
@@ -106,12 +158,33 @@
     </div>
   </div>
 
+  <!-- Projects Section -->
+  <h2 id="projects-heading">Projects</h2>
+  <div class="projects" id="projects-container">
+    <div class="project-card">
+      <h3>Portfolio Website</h3>
+      <p>A personal portfolio website built using HTML, CSS, and JavaScript.</p>
+      <a href="#">View Project</a>
+    </div>
+    <div class="project-card">
+      <h3>Physics Simulation</h3>
+      <p>Simulated physical systems using Python and visualizations with matplotlib.</p>
+      <a href="#">View Project</a>
+    </div>
+    <div class="project-card">
+      <h3>Calculator App</h3>
+      <p>Built a simple calculator with HTML, CSS, and JavaScript.</p>
+      <a href="#">View Project</a>
+    </div>
+  </div>
+
   <script>
     const fullName = "Micah Joseph";
     const nameElement = document.getElementById("name");
     const descriptionElement = document.getElementById("description");
     const skillsHeading = document.getElementById("skills-heading");
     const skillsContainer = document.getElementById("skills-container");
+    const projectsContainer = document.getElementById("projects-container");
 
     // Typing effect for the name
     let i = 0;
@@ -119,49 +192,61 @@
       if (i < fullName.length) {
         nameElement.textContent += fullName.charAt(i);
         i++;
-        setTimeout(typeName, 150); // typing speed
+        setTimeout(typeName, 150);
       } else {
-        startAgeAndFadeIn(); // start description fade-in and age updates
+        startAgeAndFadeIn();
       }
     }
 
-    // Real-time age calculation
+    // Age calculation
     function calculateAge(birthday) {
       const now = new Date();
       const birthDate = new Date(birthday);
-      const diff = now - birthDate; // milliseconds
-      const ageDecimal = diff / (1000 * 60 * 60 * 24 * 365.25); // decimal years
+      const diff = now - birthDate;
+      const ageDecimal = diff / (1000 * 60 * 60 * 24 * 365.25);
       return ageDecimal.toFixed(8);
     }
 
-    // Update description with fade-in
     function updateDescription() {
       const age = calculateAge("2007-09-13T00:00:00");
       descriptionElement.innerHTML = `I'm an <b>${age}</b> year old A-Level student studying Computer Science, Maths, Physics and IT.`;
     }
 
     function startAgeAndFadeIn() {
-      // Fade in description and skills heading + container
+      // Fade in description, skills heading, skills container
       descriptionElement.classList.add("visible");
       skillsHeading.classList.add("visible");
       skillsContainer.classList.add("visible");
+      projectsContainer.classList.add("visible");
+      document.getElementById("projects-heading").classList.add("visible");
 
       // Start age updates
       updateDescription();
       setInterval(updateDescription, 200);
 
-      // Animate skill bars after fade-in completes (1s)
+      // Animate skill bars after fade-in completes
       setTimeout(animateSkillsStaggered, 1000);
+
+      // Animate project cards with stagger
+      setTimeout(animateProjectsStaggered, 1200);
     }
 
-    // Animate skill bars with stagger
     function animateSkillsStaggered() {
       const skills = document.querySelectorAll(".skill-progress");
       skills.forEach((skill, index) => {
         const percent = skill.getAttribute("data-percent");
         setTimeout(() => {
           skill.style.width = percent;
-        }, index * 300); // stagger 0.3s between each bar
+        }, index * 300);
+      });
+    }
+
+    function animateProjectsStaggered() {
+      const projectCards = document.querySelectorAll(".project-card");
+      projectCards.forEach((card, index) => {
+        setTimeout(() => {
+          card.classList.add("visible");
+        }, index * 300);
       });
     }
 
