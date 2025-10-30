@@ -101,6 +101,12 @@
       display: flex;
       flex-direction: column;
       align-items: center;
+      opacity: 0;
+      transition: opacity 1s ease-in;
+    }
+
+    .projects.visible {
+      opacity: 1;
     }
 
     .project-card {
@@ -146,17 +152,19 @@
     /* Contact Section */
     .contact {
       margin-top: 30px;
+      margin-bottom: 50px;
       display: flex;
       flex-direction: column;
       align-items: center;
+      gap: 15px;
       opacity: 0;
       transition: opacity 1s ease-in;
     }
-    
+
     .contact.visible {
       opacity: 1;
     }
-    
+
     .contact-item {
       display: flex;
       align-items: center;
@@ -166,19 +174,19 @@
       border-radius: 10px;
       box-shadow: 0 2px 6px rgba(0,0,0,0.1);
     }
-    
+
     .contact-item img {
       width: 30px;
       height: 30px;
     }
-    
+
     .contact-item a {
       color: #222;
       text-decoration: none;
       font-size: 1.1rem;
       font-weight: bold;
     }
-    
+
     .contact-item a:hover {
       color: #4caf50;
     }
@@ -191,56 +199,33 @@
 
   <h2 id="skills-heading">Coding languages I know:</h2>
   <div class="skills" id="skills-container">
-    <div class="skill">
-      <div class="skill-name">HTML</div>
-      <div class="skill-bar"><div class="skill-progress" data-percent="90%"></div></div>
-    </div>
-    <div class="skill">
-      <div class="skill-name">Python</div>
-      <div class="skill-bar"><div class="skill-progress" data-percent="85%"></div></div>
-    </div>
-    <div class="skill">
-      <div class="skill-name">CSS</div>
-      <div class="skill-bar"><div class="skill-progress" data-percent="80%"></div></div>
-    </div>
-    <div class="skill">
-      <div class="skill-name">JavaScript</div>
-      <div class="skill-bar"><div class="skill-progress" data-percent="70%"></div></div>
-    </div>
-    <div class="skill">
-      <div class="skill-name">PHP</div>
-      <div class="skill-bar"><div class="skill-progress" data-percent="55%"></div></div>
-    </div>
+    <div class="skill"><div class="skill-name">HTML</div><div class="skill-bar"><div class="skill-progress" data-percent="90%"></div></div></div>
+    <div class="skill"><div class="skill-name">Python</div><div class="skill-bar"><div class="skill-progress" data-percent="85%"></div></div></div>
+    <div class="skill"><div class="skill-name">CSS</div><div class="skill-bar"><div class="skill-progress" data-percent="80%"></div></div></div>
+    <div class="skill"><div class="skill-name">JavaScript</div><div class="skill-bar"><div class="skill-progress" data-percent="70%"></div></div></div>
+    <div class="skill"><div class="skill-name">PHP</div><div class="skill-bar"><div class="skill-progress" data-percent="55%"></div></div></div>
   </div>
 
   <!-- Projects Section -->
   <h2 id="projects-heading">Projects</h2>
   <div class="projects" id="projects-container">
-    <div class="project-card">
-      <h3>Portfolio Website</h3>
-      <p>This page! Built using HTML, CSS, and JavaScript.</p>
-      <a href="https://micah.eu.org/">View Project</a> | <a href="https://github.com/MicahKJ/portfolio" target="_blank" rel="noopener noreferrer">View Source</a>
-    </div>
-    <div class="project-card">
-      <h3>Symptom Checker</h3>
-      <p>Prototype Symptom Checker which allows users to input their symptoms and receive possible conditions using AJAX, PHP, JS and HTML/CSS.</p>
-      <a href="https://symptoms.cscoursework.co.uk/" target="_blank" rel="noopener noreferrer">View Project</a>
-    </div>
-    <div class="project-card">
-      <h3>Calculator App</h3>
-      <p>Built a fast, fancy calculator using HTML, CSS, and JavaScript. This was a fun project as part of a walkthrough coding challenge!</p>
-      <a href="/calculator/" target="_blank" rel="noopener noreferrer">View Project</a>
-    </div>
+    <div class="project-card"><h3>Portfolio Website</h3><p>This page! Built using HTML, CSS, and JavaScript.</p><a href="https://micah.eu.org/">View Project</a> | <a href="https://github.com/MicahKJ/portfolio" target="_blank" rel="noopener noreferrer">View Source</a></div>
+    <div class="project-card"><h3>Symptom Checker</h3><p>Prototype Symptom Checker which allows users to input their symptoms and receive possible conditions using AJAX, PHP, JS and HTML/CSS.</p><a href="https://symptoms.cscoursework.co.uk/" target="_blank" rel="noopener noreferrer">View Project</a></div>
+    <div class="project-card"><h3>Calculator App</h3><p>Built a fast and fancy calculator using HTML, CSS, and JavaScript. This was a fun project as part of a walkthrough coding challenge!</p><a href="/calculator/" target="_blank" rel="noopener noreferrer">View Project</a></div>
   </div>
 
   <!-- Contacts Section -->
   <h2 id="contact-heading">Contact</h2>
-<div class="contact" id="contact-container">
-  <div class="contact-item">
-    <img src="https://cdn-icons-png.flaticon.com/512/732/732200.png" alt="Email Icon">
-    <p><a href="mailto:micah.joseph07@gmail.com">micah.joseph07@gmail.com</a></p>
+  <div class="contact" id="contact-container">
+    <div class="contact-item">
+      <img src="https://cdn-icons-png.flaticon.com/512/732/732200.png" alt="Email Icon">
+      <p><a href="mailto:micah.joseph07@gmail.com">micah.joseph07@gmail.com</a></p>
+    </div>
+    <div class="contact-item">
+      <img src="https://cdn-icons-png.flaticon.com/512/25/25231.png" alt="GitHub Icon">
+      <p><a href="https://github.com/MicahKJ" target="_blank" rel="noopener noreferrer">MicahKJ</a></p>
+    </div>
   </div>
-</div>
 
   <script>
     const fullName = "Micah Joseph";
@@ -248,8 +233,10 @@
     const descriptionElement = document.getElementById("description");
     const skillsHeading = document.getElementById("skills-heading");
     const skillsContainer = document.getElementById("skills-container");
-    const projectsContainer = document.getElementById("projects-container");
     const projectsHeading = document.getElementById("projects-heading");
+    const projectsContainer = document.getElementById("projects-container");
+    const contactHeading = document.getElementById("contact-heading");
+    const contactContainer = document.getElementById("contact-container");
 
     // Typing effect for name
     let i = 0;
@@ -278,21 +265,12 @@
     }
 
     function startFadeInAndAge() {
-      // Fade in description, skills, and headings
       descriptionElement.classList.add("visible");
       skillsHeading.classList.add("visible");
       skillsContainer.classList.add("visible");
-      projectsHeading.classList.add("visible");
-
-      // Start age updates
       updateDescription();
       setInterval(updateDescription, 200);
-
-      // Animate skill bars
       setTimeout(animateSkills, 1000);
-
-      // Animate project cards
-      setTimeout(animateProjects, 1200);
     }
 
     function animateSkills() {
@@ -303,6 +281,14 @@
           skill.style.width = percent;
         }, index * 300);
       });
+
+      // Wait until bars finish animating before showing projects
+      const totalSkillAnimTime = skills.length * 300 + 1000;
+      setTimeout(() => {
+        projectsHeading.classList.add("visible");
+        projectsContainer.classList.add("visible");
+        animateProjects();
+      }, totalSkillAnimTime);
     }
 
     function animateProjects() {
@@ -312,13 +298,14 @@
           card.classList.add("visible");
         }, index * 300);
       });
-    }
-        // Animate Contact section
-    setTimeout(() => {
-      document.getElementById("contact-heading").classList.add("visible");
-      document.getElementById("contact-container").classList.add("visible");
-    }, 1800);
 
+      // Wait until projects appear before showing contact
+      const totalProjectAnimTime = projectCards.length * 300 + 1000;
+      setTimeout(() => {
+        contactHeading.classList.add("visible");
+        contactContainer.classList.add("visible");
+      }, totalProjectAnimTime);
+    }
 
     window.onload = typeName;
   </script>
