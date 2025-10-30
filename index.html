@@ -25,15 +25,12 @@
       min-height: 3.5rem;
     }
 
-    p {
-      font-size: 1.2rem;
-      color: #555;
-      margin-top: 20px;
+    p, h2, .skills {
       opacity: 0; /* start hidden */
       transition: opacity 1s ease-in; /* fade-in effect */
     }
 
-    p.visible {
+    p.visible, h2.visible, .skills.visible {
       opacity: 1;
     }
 
@@ -85,8 +82,8 @@
   <h1 id="name"></h1>
   <p id="description"></p>
 
-  <h2>Coding languages I know:</h2>
-  <div class="skills">
+  <h2 id="skills-heading">Coding languages I know:</h2>
+  <div class="skills" id="skills-container">
     <div class="skill">
       <div class="skill-name">HTML</div>
       <div class="skill-bar"><div class="skill-progress" data-percent="90%"></div></div>
@@ -113,6 +110,8 @@
     const fullName = "Micah Joseph";
     const nameElement = document.getElementById("name");
     const descriptionElement = document.getElementById("description");
+    const skillsHeading = document.getElementById("skills-heading");
+    const skillsContainer = document.getElementById("skills-container");
 
     // Typing effect for the name
     let i = 0;
@@ -122,8 +121,7 @@
         i++;
         setTimeout(typeName, 150); // typing speed
       } else {
-        startAgeUpdate(); // Start age calculation after typing finishes
-        animateSkills(); // animate skill bars
+        startAgeAndFadeIn(); // start description fade-in and age updates
       }
     }
 
@@ -140,22 +138,30 @@
     function updateDescription() {
       const age = calculateAge("2007-09-13T00:00:00");
       descriptionElement.innerHTML = `I'm an <b>${age}</b> year old A-Level student studying Computer Science, Maths, Physics and IT.`;
+    }
+
+    function startAgeAndFadeIn() {
+      // Fade in description and skills heading + container
       descriptionElement.classList.add("visible");
-    }
+      skillsHeading.classList.add("visible");
+      skillsContainer.classList.add("visible");
 
-    function startAgeUpdate() {
+      // Start age updates
       updateDescription();
-      setInterval(updateDescription, 200); // update every second
+      setInterval(updateDescription, 1000);
+
+      // Animate skill bars after fade-in completes (1s)
+      setTimeout(animateSkillsStaggered, 1000);
     }
 
-    // Animate skill bars
-    function animateSkills() {
+    // Animate skill bars with stagger
+    function animateSkillsStaggered() {
       const skills = document.querySelectorAll(".skill-progress");
-      skills.forEach(skill => {
+      skills.forEach((skill, index) => {
         const percent = skill.getAttribute("data-percent");
         setTimeout(() => {
           skill.style.width = percent;
-        }, 500); // slight delay for effect
+        }, index * 300); // stagger 0.3s between each bar
       });
     }
 
