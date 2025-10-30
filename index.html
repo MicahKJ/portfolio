@@ -27,7 +27,7 @@
 
     p, h2, .skills, .projects {
       opacity: 0; /* start hidden */
-      transition: opacity 1s ease-in; /* fade-in effect */
+      transition: opacity 1s ease-in;
     }
 
     p.visible, h2.visible, .skills.visible, .projects.visible {
@@ -45,7 +45,7 @@
     }
 
     p {
-      font-size: 1.4rem; /* slightly bigger text */
+      font-size: 1.4rem;
       color: #555;
       margin-top: 20px;
     }
@@ -70,7 +70,7 @@
 
     .skill-bar {
       width: 100%;
-      background-color: #ddd; /* grey background */
+      background-color: #ddd;
       border-radius: 5px;
       overflow: hidden;
       height: 20px;
@@ -78,7 +78,7 @@
 
     .skill-progress {
       height: 100%;
-      background-color: #4caf50; /* green progress */
+      background-color: #4caf50;
       width: 0%;
       border-radius: 5px;
       transition: width 1s ease-in-out;
@@ -104,7 +104,8 @@
       text-align: left;
       opacity: 0;
       transform: translateY(20px);
-      transition: opacity 0.6s ease-in-out, transform 0.6s ease-in-out;
+      transition: opacity 0.6s ease-in-out, transform 0.6s ease-in-out, transform 0.3s, box-shadow 0.3s;
+      color: #222; /* ensure text is visible */
     }
 
     .project-card.visible {
@@ -119,13 +120,19 @@
 
     .project-card p {
       margin: 0 0 10px;
-      color: #555;
+      color: #444; /* make description visible */
     }
 
     .project-card a {
       color: #4caf50;
       text-decoration: none;
       font-weight: bold;
+    }
+
+    /* Hover effect for project cards */
+    .project-card:hover {
+      transform: scale(1.03);
+      box-shadow: 0 6px 15px rgba(0,0,0,0.2);
     }
 
   </style>
@@ -186,7 +193,7 @@
     const skillsContainer = document.getElementById("skills-container");
     const projectsContainer = document.getElementById("projects-container");
 
-    // Typing effect for the name
+    // Typing effect for name
     let i = 0;
     function typeName() {
       if (i < fullName.length) {
@@ -213,7 +220,7 @@
     }
 
     function startAgeAndFadeIn() {
-      // Fade in description, skills heading, skills container
+      // Fade in description, skills, projects heading + container
       descriptionElement.classList.add("visible");
       skillsHeading.classList.add("visible");
       skillsContainer.classList.add("visible");
