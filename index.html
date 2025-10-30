@@ -7,62 +7,114 @@
   <style>
     body {
       display: flex;
-      justify-content: center;
+      flex-direction: column;
       align-items: center;
-      height: 100vh;
+      justify-content: flex-start;
+      min-height: 100vh;
       margin: 0;
       font-family: 'Arial', sans-serif;
       background: #fff8e7; /* slight cream */
-      flex-direction: column;
+      padding-top: 50px;
       text-align: center;
     }
+
     h1 {
       font-size: 3rem;
       margin: 0;
       color: #222;
       min-height: 3.5rem;
-      display: inline;
-      white-space: nowrap;
     }
-    .cursor {
-      display: inline-block;
-      width: 2px;
-      height: 1.2em; /* matches the height of the text */
-      background-color: #222;
-      vertical-align: bottom;
-      animation: blink 0.7s infinite;
-      margin-left: 2px;
-    }
-    @keyframes blink {
-      0%, 50%, 100% { opacity: 1; }
-      25%, 75% { opacity: 0; }
-    }
+
     p {
       font-size: 1.2rem;
       color: #555;
       margin-top: 20px;
       opacity: 0; /* start hidden */
-      transition: opacity 1.2s ease-in; /* fade-in effect */
+      transition: opacity 1s ease-in; /* fade-in effect */
     }
+
     p.visible {
       opacity: 1;
     }
+
     b {
       font-weight: bold;
+    }
+
+    h2 {
+      margin-top: 40px;
+      font-size: 1.8rem;
+      color: #222;
+    }
+
+    .skills {
+      margin-top: 20px;
+      width: 80%;
+      max-width: 600px;
+    }
+
+    .skill {
+      margin-bottom: 15px;
+    }
+
+    .skill-name {
+      text-align: left;
+      margin-bottom: 5px;
+      font-weight: bold;
+      color: #222;
+    }
+
+    .skill-bar {
+      width: 100%;
+      background-color: #ddd; /* grey background */
+      border-radius: 5px;
+      overflow: hidden;
+      height: 20px;
+    }
+
+    .skill-progress {
+      height: 100%;
+      background-color: #4caf50; /* green progress */
+      width: 0%;
+      border-radius: 5px;
+      transition: width 1s ease-in-out;
     }
   </style>
 </head>
 <body>
-  <h1 id="name"></h1><span class="cursor"></span>
+  <h1 id="name"></h1>
   <p id="description"></p>
+
+  <h2>Coding languages I know:</h2>
+  <div class="skills">
+    <div class="skill">
+      <div class="skill-name">HTML</div>
+      <div class="skill-bar"><div class="skill-progress" data-percent="90%"></div></div>
+    </div>
+    <div class="skill">
+      <div class="skill-name">Python</div>
+      <div class="skill-bar"><div class="skill-progress" data-percent="85%"></div></div>
+    </div>
+    <div class="skill">
+      <div class="skill-name">CSS</div>
+      <div class="skill-bar"><div class="skill-progress" data-percent="80%"></div></div>
+    </div>
+    <div class="skill">
+      <div class="skill-name">JavaScript</div>
+      <div class="skill-bar"><div class="skill-progress" data-percent="75%"></div></div>
+    </div>
+    <div class="skill">
+      <div class="skill-name">PHP</div>
+      <div class="skill-bar"><div class="skill-progress" data-percent="60%"></div></div>
+    </div>
+  </div>
 
   <script>
     const fullName = "Micah Joseph";
     const nameElement = document.getElementById("name");
-    const cursorElement = document.querySelector(".cursor");
     const descriptionElement = document.getElementById("description");
 
-    // Typing effect
+    // Typing effect for the name
     let i = 0;
     function typeName() {
       if (i < fullName.length) {
@@ -70,8 +122,8 @@
         i++;
         setTimeout(typeName, 150); // typing speed
       } else {
-        cursorElement.style.display = "inline-block"; // ensure cursor is visible
-        startAgeUpdate(); // Start real-time age update after typing finishes
+        startAgeUpdate(); // Start age calculation after typing finishes
+        animateSkills(); // animate skill bars
       }
     }
 
@@ -84,11 +136,11 @@
       return ageDecimal.toFixed(8);
     }
 
-    // Update age continuously
+    // Update description with fade-in
     function updateDescription() {
       const age = calculateAge("2007-09-13T00:00:00");
       descriptionElement.innerHTML = `I'm an <b>${age}</b> year old A-Level student studying Computer Science, Maths, Physics and IT.`;
-      descriptionElement.classList.add("visible"); // trigger fade-in
+      descriptionElement.classList.add("visible");
     }
 
     function startAgeUpdate() {
@@ -96,8 +148,16 @@
       setInterval(updateDescription, 200); // update every second
     }
 
-    // Hide cursor initially until typing finishes
-    cursorElement.style.display = "none";
+    // Animate skill bars
+    function animateSkills() {
+      const skills = document.querySelectorAll(".skill-progress");
+      skills.forEach(skill => {
+        const percent = skill.getAttribute("data-percent");
+        setTimeout(() => {
+          skill.style.width = percent;
+        }, 500); // slight delay for effect
+      });
+    }
 
     window.onload = typeName;
   </script>
