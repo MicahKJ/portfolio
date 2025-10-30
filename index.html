@@ -25,15 +25,6 @@
       min-height: 3.5rem;
     }
 
-    p, h2, .skills, .projects {
-      opacity: 0; /* start hidden */
-      transition: opacity 1s ease-in;
-    }
-
-    p.visible, h2.visible, .skills.visible, .projects.visible {
-      opacity: 1;
-    }
-
     b {
       font-weight: bold;
     }
@@ -42,12 +33,25 @@
       margin-top: 40px;
       font-size: 1.8rem;
       color: #222;
+      opacity: 0;
+      transition: opacity 1s ease-in;
     }
 
-    p {
+    h2.visible {
+      opacity: 1;
+    }
+
+    /* Description */
+    #description {
       font-size: 1.4rem;
       color: #555;
       margin-top: 20px;
+      opacity: 0;
+      transition: opacity 1s ease-in;
+    }
+
+    #description.visible {
+      opacity: 1;
     }
 
     /* Skills Section */
@@ -55,6 +59,12 @@
       margin-top: 20px;
       width: 80%;
       max-width: 600px;
+      opacity: 0;
+      transition: opacity 1s ease-in;
+    }
+
+    .skills.visible {
+      opacity: 1;
     }
 
     .skill {
@@ -105,7 +115,7 @@
       opacity: 0;
       transform: translateY(20px);
       transition: opacity 0.6s ease-in-out, transform 0.6s ease-in-out, transform 0.3s, box-shadow 0.3s;
-      color: #222; /* ensure text is visible */
+      color: #222;
     }
 
     .project-card.visible {
@@ -120,7 +130,7 @@
 
     .project-card p {
       margin: 0 0 10px;
-      color: #222; /* ensure description text is visible */
+      color: #222;
     }
 
     .project-card a {
@@ -129,7 +139,6 @@
       font-weight: bold;
     }
 
-    /* Hover effect for project cards */
     .project-card:hover {
       transform: scale(1.03);
       box-shadow: 0 6px 15px rgba(0,0,0,0.2);
@@ -192,6 +201,7 @@
     const skillsHeading = document.getElementById("skills-heading");
     const skillsContainer = document.getElementById("skills-container");
     const projectsContainer = document.getElementById("projects-container");
+    const projectsHeading = document.getElementById("projects-heading");
 
     // Typing effect for name
     let i = 0;
@@ -201,7 +211,7 @@
         i++;
         setTimeout(typeName, 150);
       } else {
-        startAgeAndFadeIn();
+        startFadeInAndAge();
       }
     }
 
@@ -219,26 +229,25 @@
       descriptionElement.innerHTML = `I'm an <b>${age}</b> year old A-Level student studying Computer Science, Maths, Physics and IT.`;
     }
 
-    function startAgeAndFadeIn() {
-      // Fade in description, skills, projects heading & container
+    function startFadeInAndAge() {
+      // Fade in description, skills, and headings
       descriptionElement.classList.add("visible");
       skillsHeading.classList.add("visible");
       skillsContainer.classList.add("visible");
-      projectsContainer.classList.add("visible");
-      document.getElementById("projects-heading").classList.add("visible");
+      projectsHeading.classList.add("visible");
 
       // Start age updates
       updateDescription();
       setInterval(updateDescription, 200);
 
-      // Animate skill bars after fade-in completes
-      setTimeout(animateSkillsStaggered, 1000);
+      // Animate skill bars
+      setTimeout(animateSkills, 1000);
 
-      // Animate project cards with stagger
-      setTimeout(animateProjectsStaggered, 1200);
+      // Animate project cards
+      setTimeout(animateProjects, 1200);
     }
 
-    function animateSkillsStaggered() {
+    function animateSkills() {
       const skills = document.querySelectorAll(".skill-progress");
       skills.forEach((skill, index) => {
         const percent = skill.getAttribute("data-percent");
@@ -248,7 +257,7 @@
       });
     }
 
-    function animateProjectsStaggered() {
+    function animateProjects() {
       const projectCards = document.querySelectorAll(".project-card");
       projectCards.forEach((card, index) => {
         setTimeout(() => {
