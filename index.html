@@ -40,6 +40,11 @@
       font-size: 1.2rem;
       color: #555;
       margin-top: 20px;
+      opacity: 0; /* start hidden */
+      transition: opacity 1.5s ease-in; /* fade-in effect */
+    }
+    p.visible {
+      opacity: 1;
     }
     b {
       font-weight: bold;
@@ -80,11 +85,12 @@
     function updateDescription() {
       const age = calculateAge("2007-09-13T00:00:00");
       descriptionElement.innerHTML = `I'm an <b>${age}</b> year old A-Level student studying Computer Science, Maths, Physics and IT.`;
+      descriptionElement.classList.add("visible"); // trigger fade-in
     }
 
     function startAgeUpdate() {
       updateDescription();
-      setInterval(updateDescription, 1000); // update every second
+      setInterval(updateDescription, 200); // update every second
     }
 
     window.onload = typeName;
