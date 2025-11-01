@@ -26,7 +26,7 @@
 
   function sanitizeForEval(src) {
     const mapped = src.replace(/×/g, '*').replace(/÷/g, '/').replace(/−/g, '-');
-    if (!/^[0-9+\\-*/().\\s]*$/.test(mapped)) {
+    if (!/^[0-9+\-*/().\s]*$/.test(mapped)) {
       throw new Error('Invalid characters');
     }
     return mapped;
